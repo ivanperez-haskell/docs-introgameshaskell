@@ -84,6 +84,7 @@ making them available for every user/haskell project.
 It's simple:
 ```
 mkdir myproject
+cd myproject
 cabal sandbox init
 cabal install ...<whatever>...
 ```
