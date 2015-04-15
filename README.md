@@ -72,3 +72,14 @@ default:
 
 # Online communities
 - Facebook: https://www.facebook.com/groups/programming.haskell/
+
+# Other notes
+Whenever you try new things using cabal, use sandboxes. Sandboxes help you keep
+your environment clean, by installing packages only in one directory instead of
+making them available for every user/haskell project.
+
+It's simple:
+
+mkdir myproject
+cabal sandbox init
+cabal install ...<whatever>...
