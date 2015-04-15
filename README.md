@@ -43,6 +43,14 @@ create Android code. It takes some time to compile, but it should work
 perfectly. From that, creating your first hello world and running it on your
 phones should be trivial.
 
+When you have your Haskell game running on desktop and want to distribute it
+for Android, drop me an email and I'll help you get it running. You'll need to
+create an Android project, a Java class and a small C program, but I can send
+you mine.
+
+Recommendation: In your games, do not use print/putStrLn, or your code won't
+work well on Android.
+
 # Libraries
 
 SDL (Simple DirectMedia Layer) is a collection of libraries that provides basic
@@ -53,11 +61,6 @@ SDL 1.2 and OpenGL are available on hackage. To install them, just:
     $ cabal install OpenGL
 and
     $ cabal install sdl sdl-image sdl-mixer sdl-ttf
-
-When you have your Haskell program running on desktop and want to distribute it
-for Android, drop me an email and I'll help you get it running. You'll need to
-create an Android project, a Java class and a small C program, but I can send
-you mine.
 
 For SDL2, I use the following repositories instead of what is available by
 default:
