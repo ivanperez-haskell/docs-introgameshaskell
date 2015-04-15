@@ -82,7 +82,8 @@ your environment clean, by installing packages only in one directory instead of
 making them available for every user/haskell project.
 
 It's simple:
-
+```
 mkdir myproject
 cabal sandbox init
 cabal install ...<whatever>...
+```
