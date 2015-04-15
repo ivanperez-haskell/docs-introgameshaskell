@@ -1,5 +1,14 @@
-First of all, thank you all for attending the talk. A few pointers to help you
-on your way:
+First of all, thank you all for attending the talk. 
+
+The code is in this repo, and the slides are here:
+http://ivanperez-keera.github.io/slides/2015-04-upm-iperez/#/
+
+I would recommend going through them again, in particular, to see the videos
+from youtube. These also explain why your game does not have to be 3D or
+complex to be good or successful. The last few videos are from games that
+became (at least for a few weeks) hits on Google Play.
+
+A few pointers to help you on your way:
 
 # Haskell programming
 - Learn you a Haskell for great good (Miran Lipovaca) (http://learnyouahaskell.com/)
