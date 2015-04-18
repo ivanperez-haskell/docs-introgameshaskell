@@ -11,7 +11,7 @@ became (at least for a few weeks) hits on Google Play.
 A few pointers to help you on your way:
 
 # Haskell programming
-- Learn you a Haskell for great good (Miran Lipovaca) (http://learnyouahaskell.com/)
+- Learn you a Haskell for great good (Miran Lipovaca) (http://learnyouahaskell.com/chapters)
 - Introduction to Functional Programming (Bird & Wadler) (old edition).
 
 # Functional Reactive Programming
