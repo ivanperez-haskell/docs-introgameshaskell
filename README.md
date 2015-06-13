@@ -43,6 +43,8 @@ company with more than 100 employees).
 - Nario bros: https://github.com/keera-studios/monao
 - Frag (3D, OpenGL): https://github.com/snowmantw/Frag (Note: this game is written in Yampa, a Functional Reactive Programmming framework)
 - Falling Blocks (SDL): https://github.com/ivanperez-keera/fallingblocks (Note: this game is a good example of what one could do in 700 lines of Haskell. I would change a few things about the architecture, for instance, I would include an abstract Controller/Input, and separate rendering and logic game state, but the code is still quite clear.)
+- Voldemort: an addictive, quick-paced arcade game
+  https://github.com/ivanperez-keera/zurihac2015
 
 # Writing Haskell games for Android
 On linux, just run the steps described here:
@@ -78,6 +80,7 @@ default:
 - https://github.com/jdeseno/hs-sdl2-image
 - https://github.com/jdeseno/hs-sdl2-mixer
 - https://github.com/osa1/hsSDL2-ttf/
+- https://github.com/keera-studios/hssdl2-gfx
 
 # Assets
 - OpenGameArt: http://opengameart.org/
