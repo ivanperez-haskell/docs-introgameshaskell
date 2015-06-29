@@ -25,9 +25,10 @@ data GameState = GameState
  }
  deriving Show
 
-level gs = points gs `div` dropsPerLevel
+level gameState = points gameState `div` dropsPerLevel
 
-updatePaddlePos gs x = gs { paddle = (min x (width - paddleW), height - paddleMargin) }
+updatePaddlePos gameState newX =
+  gameState { paddle = (min newX (width - paddleW), height - paddleMargin) }
 
 initialGameState gen =
   GameState [(width / 2, dropMargin)] (0, height - paddleMargin) maxLives 0 0 0 gen
