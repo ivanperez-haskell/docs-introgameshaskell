@@ -5,7 +5,7 @@
 -- -rtsopts
 -- and run it with
 -- +RTS -V0
-import Control.Concurrent
+-- import Control.Concurrent
 import Control.Monad
 import Graphics.UI.SDL       as SDL
 import Graphics.UI.SDL.Image as SDL
@@ -25,11 +25,14 @@ data GameState = GameState
  }
  deriving Show
 
+level :: GameState -> Int
 level gameState = points gameState `div` dropsPerLevel
 
+updatePaddlePos :: GameState -> Float -> GameState
 updatePaddlePos gameState newX =
   gameState { paddle = (min newX (width - paddleW), height - paddleMargin) }
 
+initialGameState :: StdGen -> GameState
 initialGameState gen =
   GameState [(width / 2, dropMargin)] (0, height - paddleMargin) maxLives 0 0 0 gen
 
@@ -42,6 +45,7 @@ data Env = Env
  , cwiid     :: Maybe CWiidWiimote
  }
 
+main :: IO ()
 main = do
   -- Initialise SDL
   SDL.init [InitEverything]
@@ -79,6 +83,7 @@ main = do
                   in run env gs
 
 -- Game loop
+run :: Env -> GameState -> IO ()
 run env gameState = do
   -- IO: Sense (input)
   gameStateP <- calculatePaddlePos env gameState
@@ -119,6 +124,7 @@ run env gameState = do
   run env gameStateO
 
 -- * Physics
+moveForward :: Float -> GameState -> GameState
 moveForward dt gs = gs { raindrops = movedRaindrops }
   where movedRaindrops     = map moveRaindrop (raindrops gs)
         moveRaindrop (x,y) = (x, y + 0.1 * dt * fromIntegral (level gs + 1))
@@ -126,6 +132,7 @@ moveForward dt gs = gs { raindrops = movedRaindrops }
 -- * Collisions
 
 -- ** Collisions with paddle
+raindropsPaddle :: GameState -> GameState
 raindropsPaddle gs = gs { raindrops = remainingRaindrops
                         , points    = points gs + pts
                         } 
@@ -142,6 +149,7 @@ raindropsPaddle gs = gs { raindrops = remainingRaindrops
                within x xMin xMax = x >= xMin && x <= xMax
 
 -- ** Collisions with bottom
+raindropsBottom :: GameState -> GameState
 raindropsBottom gs = gs { raindrops = remainingRaindrops
                         , lives     = decreasedLives
                         }
@@ -157,6 +165,7 @@ calculatePaddlePos env gs = case cwiid env of
                return (updatePaddlePos gs x)
 
 -- ** SDL Sensing
+calculatePaddlePosSDL :: Env -> GameState -> IO GameState
 calculatePaddlePosSDL env gs = do
   e <- pollEvent
   case e of
@@ -165,6 +174,7 @@ calculatePaddlePosSDL env gs = do
     _                   -> calculatePaddlePosSDL env gs
 
 -- * Output drawing
+render :: Env -> GameState -> IO ()
 render env gameState = do
 
   screen <- getVideoSurface
@@ -201,18 +211,32 @@ render env gameState = do
   SDL.flip screen
 
 -- * Game constants
-paddleW      = 104
-paddleH      = 24
+paddleW, paddleH :: Float
+paddleW = 104
+paddleH = 24
+
+paddleMargin :: Float
 paddleMargin = 60
-width        = 640
-height       = 480
+
+width, height :: Float
+width         = 640
+height        = 480
+
+dropW, dropH :: Float
 dropW        = 20
 dropH        = 20
-dropMargin   = 10
 
+dropMargin :: Float
+dropMargin = 10
+
+dropsPerLevel :: Int
 dropsPerLevel = 20
-dropDelay     = 500
-maxLives      = 10
+
+dropDelay :: Float
+dropDelay = 500
+
+maxLives :: Int
+maxLives = 10
 
 -- * Wiimote sensing
 
@@ -228,6 +252,7 @@ initializeWiimote = do
     Just wm' -> void $ cwiidSetRptMode wm' 15 -- Enable button reception, acc and IR
   return wm
 
+senseWiimote :: CWiidWiimote -> IO (Float, Float)
 senseWiimote wmdev = do
   irs   <- cwiidGetIR wmdev
 
